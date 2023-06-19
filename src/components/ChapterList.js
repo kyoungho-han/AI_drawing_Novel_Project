@@ -1,7 +1,7 @@
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Link } from 'react-router-dom';
 
-function ChapterList() {
+function ChapterList({prompt}) {
   return (
     <ListGroup>
       <ListGroup.Item 
@@ -10,7 +10,7 @@ function ChapterList() {
         className="d-flex justify-content-between align-items-start"
       >
         <div className="ms-2 me-auto">
-          <div className="fw-bold">책제목 / 글쓴이</div>          
+          <div className="fw-bold">{prompt} / 글쓴이</div>          
         </div>        
       </ListGroup.Item>
       <ListGroup.Item

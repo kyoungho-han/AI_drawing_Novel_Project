@@ -55,3 +55,7 @@
   height: 10%;
   width: 10%;
 }
+.notice {
+  text-align: center;
+  color: red;
+}

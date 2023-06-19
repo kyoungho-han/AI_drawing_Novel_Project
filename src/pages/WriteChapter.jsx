@@ -11,19 +11,25 @@ import { useLocation } from 'react-router-dom';
 const WriteChapter = () => {
     const location = useLocation();
     const selectedImage = location.state?.selectedImage;
+    const prompt = location.state?.prompt;
 
     return (
         <div className={styles.section}>            
         <Container>              
         <Row>
             <Col>
-                <div className={styles.img}>
-                    <img src={selectedImage} alt="선택된 이미지" />
+                <div className={styles.imgContainer}>
+                    <div className={styles.img}>
+                        <img src={selectedImage} alt="선택된 이미지" />                    
+                    </div>                
+                    <div className={styles.img2}>
+                            <img src="img/bookImg.png" alt="책 표지" />
+                    </div>
                 </div>
             </Col>
             <Col>
                 <div className={styles.chapter}>
-                    <ChapterList />
+                    <ChapterList prompt={prompt} />
                 </div><br/>
                 <div className={styles.button}>
                     <Button variant="outline-info">출판하기</Button>

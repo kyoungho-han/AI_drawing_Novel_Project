@@ -4,14 +4,15 @@ import styles from '../styles/BookImageSelect.module.css';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Configuration, OpenAIApi } from "openai";
+import axios from 'axios';
 
 const BookImageSelect = () => {
   const [prompt, setPrompt] = useState("");
   const [results, setResults] = useState([]);
-  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");  
   const navigate = useNavigate();
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: "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",
   });
 
   const openai = new OpenAIApi(configuration);
@@ -19,15 +20,25 @@ const BookImageSelect = () => {
   const generateImages = async () => {        
     const res = await openai.createImage({
       prompt: prompt,
-      n: 4,
+      n: 1,
       size: "256x256",
     });
     setResults(res.data.data.map(item => item.url));
+
+    try {
+      const data = {
+        string: prompt
+      };  
+      const response = await axios.post('http://localhost:8080/novels/translate', data);
+      console.log(response.data);    
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleImageClick = (image) => {
     setSelectedImage(image);  
-    navigate('/writeChapter', { state: { selectedImage: image } });
+    navigate('/writeChapter', { state: { selectedImage: image, prompt } });
   };
 
   return (
@@ -58,7 +69,10 @@ const BookImageSelect = () => {
                 alt={`결과 ${index}`}
                 onClick={() => handleImageClick(result)}
               />
-            ))}           
+            ))}
+            <br /><br />
+            <div className={styles.notice}>↑↑↑ 위의 그림 중에 하나를 클릭해주세요</div> 
+            
           </div>
         ) : (
           <></>
