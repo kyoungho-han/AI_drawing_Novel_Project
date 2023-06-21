@@ -21,7 +21,7 @@ function Start() {
           <img className={styles.image1} src={StartImage1} art=""></img>
           <img className={styles.image2} src={StartImage2} art=""></img>
         </div>
-        <img className={styles.image3}src={StartImage3} art=""></img>
+        <img className={styles.image3} src={StartImage3} art=""></img>
       </div>
     </div>
   );

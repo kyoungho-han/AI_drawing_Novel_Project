@@ -1,44 +1,57 @@
-import React from 'react'
-import ChapterList from '../components/ChapterList'
-import styles from '../styles/WriteChapter.module.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
-import { useLocation } from 'react-router-dom';
-
+import styles from '../styles/WriteChapter.module.css';
+import Form from 'react-bootstrap/Form';
+import Modals from '../components/Modals';
+import axios from 'axios';
 
 const WriteChapter = () => {
-    const location = useLocation();
-    const selectedImage = location.state?.selectedImage;
-    const prompt = location.state?.prompt;
+  
+  const [ textValue, setTextValue ] = useState('');  
+  const [showModal, setShowModal] = useState(false);
 
-    return (
-        <div className={styles.section}>            
-        <Container>              
-        <Row>
-            <Col>
-                <div className={styles.imgContainer}>
-                    <div className={styles.img}>
-                        <img src={selectedImage} alt="선택된 이미지" />                    
-                    </div>                
-                    <div className={styles.img2}>
-                            <img src="img/bookImg.png" alt="책 표지" />
-                    </div>
-                </div>
-            </Col>
-            <Col>
-                <div className={styles.chapter}>
-                    <ChapterList prompt={prompt} />
-                </div><br/>
-                <div className={styles.button}>
-                    <Button variant="outline-info">출판하기</Button>
-                </div>
-            </Col>
-        </Row>      
-        </Container> 
-        </div>
-    )
-}
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
-export default WriteChapter
+  const handleCompleteWriting = () => {    
+    const data = {
+      text: textValue
+    };    
+    axios.post('http://localhost:8080/chapters/1', data)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log("error");
+        console.log(error);
+      });
+  };
+
+  const handleSelectImg = () => {
+    setShowModal(true);
+  }
+
+    return (        
+          <div className={styles.writeForm}>            
+              챕터제목 : <input placeholder='chapter...'></input><hr/>
+            <textarea 
+              className={styles.txtarea}
+              placeholder="여기에 입력하세요"                     
+              value={textValue}
+              onChange={(e) => setTextValue(e.target.value)}
+            ></textarea>          
+            <hr />
+            <div>            
+                  <Button variant="outline-info" onClick={handleSelectImg}>그림 선택</Button>
+                  <Button variant="outline-warning">임시 저장</Button>
+                  <Button variant="outline-success" onClick={handleCompleteWriting}>글 작성 완료</Button>
+            </div>
+            <Modals show={showModal} handleClose={handleCloseModal} />          
+          </div>
+          
+        
+      );
+    }
+
+export default WriteChapter;

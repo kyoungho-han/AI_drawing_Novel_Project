@@ -5,10 +5,10 @@
   width: 20%;;
 }
 .card {
-  background-color: #CBB279;
+  background-color: #56c3d9;
       
-  width: 1000px;
-  height:500px;
+  width: 500px;
+  height: 300px;
   position: absolute;
   top: 60%;
   left: 50%;
@@ -42,7 +42,7 @@
   left: 50%;
 }
 .basic {
-  text-align: center;
+  margin-left: 100px;
   width:100
 }
 .page {
@@ -58,4 +58,13 @@
 .notice {
   text-align: center;
   color: red;
+}
+.labels {
+  margin-right: 20px;
+}
+.genre {
+  margin-right: 20px;
+}
+.btn {
+  margin-left: 100px;
 }

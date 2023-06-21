@@ -1,16 +1,18 @@
 import React from "react";
 import cover from "../images/StartImage1.jpeg"
-import styles from "../styles/Book.module.css"
+import "../styles/Book.css"
 
-function Book() {
+function Book(props) {
+
+  const {data, onClick} = props;
 
   return(
-    <div className={styles.Book}>
-      <img src={cover} alt="" />
-      <div className={styles.explanation}>
-        <h2>제목 : 아기돼지삼형제</h2>
-        <p>작가 : 윤병현</p>
-        <p>페이지수 : 100</p>
+    <div className="Book" onClick={onClick}>
+      <img src={cover} alt="" /> 
+      <div className="explanation">
+        <h2>제목 : {data.title}</h2>
+        <p>작가 : {data.author}</p>
+        <p>페이지수 : {data.pageNum}</p>
       </div>
     </div>
   );

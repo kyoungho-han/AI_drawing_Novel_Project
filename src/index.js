@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Dalle2 from './components/Dalle2';
+import { NovelContext, NovelProvider } from './context/NovelContext';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <NovelProvider>
+      <App />
+    </NovelProvider>
   </React.StrictMode>
 );
 

@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import Button from 'react-bootstrap/Button';
 import styles from '../styles/BookImageSelect.module.css';
 import { useNavigate } from "react-router-dom";
@@ -38,7 +38,7 @@ const BookImageSelect = () => {
 
   const handleImageClick = (image) => {
     setSelectedImage(image);  
-    navigate('/writeChapter', { state: { selectedImage: image, prompt } });
+    navigate('/chapterListPage', { state: { selectedImage: image, prompt } });
   };
 
   return (
@@ -83,4 +83,4 @@ const BookImageSelect = () => {
   );
 };
 
-export default BookImageSelect;
+export default BookImageSelect;*/

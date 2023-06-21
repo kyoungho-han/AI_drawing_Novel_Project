@@ -2,7 +2,7 @@ import Cards from "../components/Cards";
 import { Container } from "../styles/container/Container.styled";
 import { Header, MainHeader } from "../styles/header/Header.styled";
 
-function Books(props) {
+function BookListPage(props) {
   return (
     <div>        
         <Container>
@@ -29,4 +29,4 @@ function Books(props) {
   );
 }
 
-export default Books;
+export default BookListPage;
