@@ -12,6 +12,7 @@ import Login from './pages/LoginPage';
 import UserJoin from './pages/UserJoinPage';
 import ImageCreate from './components/ImageCreate';
 import InsertNovelData from './pages/InsertNovelData';
+import MyNovels from './pages/MyNovels';
 
 
 
@@ -29,6 +30,7 @@ function App() {
             <Route path = "/chapterListPage" element = { <ChapterListPage /> } />        
             <Route path = "/insertNovelData" element = { <InsertNovelData/> } />
             <Route path = "/writeChapter" element = { <WriteChapter /> } />            
+            <Route path = "/myNovels" element = { <MyNovels />} />
           </Routes>
           <FooterStyle>
             <Footer />

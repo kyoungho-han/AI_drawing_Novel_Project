@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../images/logo.jpeg";
-import "../styles/Main.css";
+import style from "../styles/Main.module.css";
 import BookList from "../components/BookList";
 import RankList from "../components/RankList";
 import data from "../testData.json";

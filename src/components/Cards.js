@@ -9,9 +9,9 @@ function Cards(props) {
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
         <Card.Text>
-          {props.content}
+          {props.name}
         </Card.Text>
-        <Link to="/WriteChapter"><Button variant="dark">내용 보러 가기</Button></Link>
+        <Link to="/WriteChapter"><Button variant="dark">{props.btn}</Button></Link>
       </Card.Body>
     </Card>
 

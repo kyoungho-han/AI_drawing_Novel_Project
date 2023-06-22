@@ -8,7 +8,6 @@ display: flex;
 position: relative;
 width: 1400px;
 margin: 0 auto;
-
 }
 nav img{
   width: 100px;
@@ -20,7 +19,7 @@ nav img{
   right: 5%;
   line-height: 100px;
 }
-.menuLink{
+.menu .menu-link{
   text-decoration: none;
   margin-left: 30px;
   color: white;
@@ -46,7 +45,7 @@ nav img{
   flex-wrap: wrap;
   background-color: #E1D4BB;
 }
-.bookLink{
+.book-link{
   text-decoration: none;
   color: black;
 }

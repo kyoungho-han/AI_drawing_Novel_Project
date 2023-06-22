@@ -4,6 +4,9 @@ import { Container } from "../styles/container/Container.styled";
 import { Header, MainHeader } from "../styles/header/Header.styled";
 import axios from "axios";
 import PageNations from "../components/PageNations";
+import BookGrid from "../components/BookGrid";
+import styles from "../styles/BookListPage.module.css";
+import Stack from 'react-bootstrap/Stack';
 
 const BookListPage = () => {
   const [novels, setNovels] = useState([]);
@@ -27,40 +30,70 @@ const BookListPage = () => {
             <h1>소설 게시판</h1>
           </MainHeader>
         </Header>
-        <hr />
-        <br />
-        <div className="row">
-          <div className="col">
-            <Cards title="책 제목 1" content="글쓴이" />
-          </div>
-          <div className="col">
-            <Cards title="책 제목 2" content="글쓴이" />
-          </div>
-          <div className="col">
-            <Cards title="책 제목 3" content="글쓴이" />
-          </div>
-          <div className="col">
-            <Cards title="책 제목 4" content="글쓴이" />
-          </div>
-          <div className="col">
-            <Cards title="책 제목 5" content="글쓴이" />
-          </div>
-          <div className="col">
-            <Cards title="책 제목 6" content="글쓴이" />
-          </div>
-          <div className="col">
-            <Cards title="책 제목 7" content="글쓴이" />
-          </div>
-          <div className="col">
-            <Cards title="책 제목 8" content="글쓴이" />
-          </div>
-          <div className="col">
-            <Cards title="책 제목 9" content="글쓴이" />
-          </div>
-          <div className="col">
-            <Cards title="책 제목 10" content="글쓴이" />
-          </div>
-        </div>
+      <br/><br/>      
+      <div className={styles.genre}>
+      <Stack direction="horizontal" gap={3}>
+        <div className="p-2">전체</div>
+        <div className="p-2">추리</div>
+        <div className="p-2">스릴러</div>
+        <div className="p-2">공포</div>
+        <div className="p-2">과학</div>
+        <div className="p-2">판타지</div>
+        <div className="p-2">무협</div>
+        <div className="p-2">게임</div>
+        <div className="p-2">로맨스</div>
+        <div className="p-2">퓨전</div>
+        <div className="p-2">미스터리</div>
+        <div className="p-2">범죄</div>
+        <div className="p-2">코미디</div>
+        <div className="p-2">기타</div>
+     </Stack>
+     </div>
+      <hr />
+      <BookGrid
+        imageSrc="book.jpg"
+        bookName="Book Title"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum urna a metus ullamcorper."
+      />
+      <hr/>
+      <BookGrid
+        imageSrc="book.jpg"
+        bookName="Book Title"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum urna a metus ullamcorper."
+      />
+      <hr/>
+      <BookGrid
+        imageSrc="book.jpg"
+        bookName="Book Title"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum urna a metus ullamcorper."
+      />
+      <hr/>
+      <BookGrid
+        imageSrc="book.jpg"
+        bookName="Book Title"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum urna a metus ullamcorper."
+      />
+      <hr/>
+      <BookGrid
+        imageSrc="book.jpg"
+        bookName="Book Title"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum urna a metus ullamcorper."
+      />
+      <hr/>
+      <BookGrid
+        imageSrc="book.jpg"
+        bookName="Book Title"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum urna a metus ullamcorper."
+      />
+      <hr/>
+      <BookGrid
+        imageSrc="book.jpg"
+        bookName="Book Title"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum urna a metus ullamcorper."
+      />
+
+      
+      <hr />              
         <br />
         <div className="d-flex justify-content-center">
           <PageNations />

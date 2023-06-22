@@ -1,34 +1,51 @@
-.body{
-  width: 700px;
-  background-color: #537188;
+.formStyle{
+  width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border:4px #537188 solid;
   border-radius: 30px;
-  margin: 50px auto;
-  padding: 50px;
+  padding: 30px 5px;
 }
-
-h1{
-  font-size: 60px;
-  text-align: center;
-}
-
 .inputArea{
-  display: block;
-  font-size: 20px;
-  margin: 60px  auto;
-  width: 230px ;
-  padding: 10px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0 ;
 }
 
-.button{
-  font-size: 30px;
-  text-align: center;
-  line-height: 50px;
-  border: none;
-  border-radius: 10px;
-  background-color: #CBB279;
-  color: black;
-  padding: 5px;
-  width: 300px;
-  margin-left: 150px;
- 
+.inputArea input{
+  font-size: 20px;
+  width: 350px;
+  padding: 10px 10px 10px 20px;
 }
+
+.inputArea p{
+  width: 400px;
+  font-size: 15px;
+  color: red;
+  margin-left: 10px;
+}
+
+.inputArea .errorMessage{
+  width: 400px;
+  font-size: 15px;
+  color: red;
+  margin-left: 10px;
+  margin-top: -20px;
+}
+
+.submitButton button{
+  font-size: 20px;
+  font-weight: bold;
+  width: 380px;
+  padding: 10px;
+  margin: 20px 0;
+  color: white;
+  background-color: #537188;
+  border: none;
+  cursor: pointer;
+}
+

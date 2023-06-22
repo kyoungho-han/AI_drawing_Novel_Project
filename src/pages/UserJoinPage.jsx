@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
-import styles from "../styles/UserJoin.module.css";
+import axios from "axios";
+import { useNavigate } from 'react-router';
+import style from "../styles/UserJoin.module.css"
+
 
 function UserJoin() {
+
+  const navigate = useNavigate();
 
   //회원 가입정보
   const [userId, setUserId] = useState("");
@@ -24,6 +29,9 @@ function UserJoin() {
   // 가입버튼 활성화 여부
   const [buttonUsed, setButtonUsed] = useState(false);
 
+  // 아이디 중복 여부 메세지
+  const [checkId, setChekId] = useState("");
+
   const [userJson, setUserJson] = useState({
     id: null,
     password: null,
@@ -33,48 +41,23 @@ function UserJoin() {
 
   // 유저정보를 전부 옳바르게 입력했는지 확인 후 가입버튼 활성화
   useEffect(() => {
-    if(isuserId && isuserPw && isuserPhone && isuserName){
-      setButtonUsed(true)
-    }
-    else{
+    if(isuserId && isuserPw && isuserName){
       setButtonUsed(false)
     }
-  },[isuserId, isuserPw , isuserPhone , isuserName])
-
-  const dataPush = () =>{
-
-    //서버로 값 보내는 메서드
-    setUserJson({
-      id: userId,
-      password: userPw,
-      userName: userName,
-      tel: userPhone,
-    })
-
-    const option = {
-      method: "POST",
-      headers : {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(userJson)
+    else{
+      setButtonUsed(true)
     }
+  },[isuserId, isuserPw   , isuserName])
 
-    const response = fetch("", option)
-    .then(response => {
-      console.log(response);
-    })
-
-  }
-
-
+  
   // 유저정보 입력 후 유효성 검사 및 유저정보 저장
   const onChangeId = (e) =>{
-
+    setChekId("")
     const id = e.target.value;
     const effectivenessId = /^[a-z0-9_-]{5,20}$/;
 
     if(!effectivenessId.test(id)){
-      setIdMessage("아이디: 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.")
+      setIdMessage("5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.")
       setIsUserId(false)
     }else{
       setUserId(id);
@@ -84,7 +67,6 @@ function UserJoin() {
 
 
   };
-
 
   const onChangePw = (e) =>{
     
@@ -104,10 +86,10 @@ function UserJoin() {
 
   const onChangeName = (e) =>{
     const name = e.target.value;
-     const effectivenessName =  /[가-힣]/;
+     const effectivenessName =  /^[가-힣]*$/;
 
-     if(name.length < 2 && name.length > 5 && !effectivenessName.test(name)){
-      setNameMessage("이름은 2글자 이상 5글자 이하로 입력해주세요!")
+     if((name.length < 2 || name.length > 5) || (!effectivenessName.test(name))){
+      setNameMessage("한글로 입력해주세요 (2 ~ 5 글자)")
       setIsUserName(false);
      }
      else{
@@ -117,45 +99,76 @@ function UserJoin() {
      }
   };
 
-  const onChangePhone = (e) =>{
-    const phone = e.target.value;
-    const effectivenessPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+  // const onChangePhone = (e) =>{
+  //   const phone = e.target.value;
+  //   const effectivenessPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
-    if(!effectivenessPhone.test(phone)){
-      setPhoneMessage("010-xxxx-xxxx 형식으로 입력해 주세요");
-      setIsUserPhone(false);
+  //   if(!effectivenessPhone.test(phone)){
+  //     setPhoneMessage("010-xxxx-xxxx 형식으로 입력해 주세요");
+  //     setIsUserPhone(false);
+  //   }
+  //   else{
+  //     setUserPhone(phone);
+  //     setPhoneMessage("올바른 형식입니다.");
+  //     setIsUserPhone(true);
+  //   }
+  // };
+  
+
+  //서버로 값 보내는 메서드
+  const dataPush = () =>{
+    console.log("실행")
+    axios.post("http://localhost:8080/authors/join", {
+      username: userId,
+      password: userPw,
+      name: userName,
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json'
     }
-    else{
-      setUserPhone(phone);
-      setPhoneMessage("올바른 형식입니다.");
-      setIsUserPhone(true);
-    }
-  };
+  }
+  )
+  .then(function (response) {
+       console.log(response)
+       return navigate("/main");
+      
+       
+  }).catch(function (error) {
+      // 오류발생시 실행
+      setChekId("중복된 아이디입니다.")
+  }).then(function() {
+      // 항상 실행
+  });
+  }
 
 
   return(
-    <div className={styles.body}>
+    <div className="body">
+      
       <h1>회원가입</h1>
-      <form onSubmit={dataPush}>
-      <div className={styles.inputArea}>
-        <input type="text" id="id" placeholder="ID" onChange={onChangeId}/>
-        <p>{idMessage}</p>
-      </div>
-      <div className={styles.inputArea}>
-        <input type="password" id="passwd" placeholder="PW"  onChange={onChangePw}/>
-        <p>{pwMessage}</p>
-      </div>
-      <div className={styles.inputArea}> 
-        <input type="text" id="name" placeholder="이름" maxLength="5" onChange={onChangeName}/>
-        <p>{nameMessage}</p>
-      </div>
-      <div className={styles.inputArea}>
-        <input type="tel" id="tel" placeholder="휴대폰 번호" maxLength="16"  onChange={onChangePhone}/>
-        <p>{phoneMessage}</p>
-      </div>
-      
-      
-      <button type="submit" className={styles.button} disabled={buttonUsed}>가입하기</button>
+      <form className={style.formStyle}>
+        <div className={style.inputArea}>
+          <input type="text" id="id" placeholder="User ID" onChange={onChangeId}/>
+          <p>{idMessage}</p>
+          <p className={style.errorMessage}>{checkId}</p>
+        </div>
+        <div className={style.inputArea}>
+          <input type="password" id="passwd" placeholder="Password"  onChange={onChangePw}/>
+          <p>{pwMessage}</p>
+        </div>
+        <div className={style.inputArea}> 
+          <input type="text" id="name" placeholder="Name" maxLength="5" onChange={onChangeName}/>
+          <p>{nameMessage}</p>
+        </div>
+         {/* <div className={style.inputArea}>
+          <input type="tel" id="tel" placeholder="휴대폰 번호" maxLength="16"  onChange={onChangePhone}/>
+          <p>{phoneMessage}</p>
+        </div>  */}
+       <div className={style.submitButton}>
+          <button type="button" disabled={buttonUsed} onClick={dataPush}>가입하기</button>
+          
+       </div>
       </form>
     </div>
   );

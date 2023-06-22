@@ -1,6 +1,15 @@
 import React from "react"
+import { useLocation } from 'react-router-dom';
 
-const Footer = () => <footer className="page-footer font-small blue pt-4">
+const Footer = () => {   
+    const location = useLocation();
+      
+    if (location.pathname === '/') {
+        return null; 
+      }
+    
+    return(
+    <footer className="page-footer font-small blue pt-4">
     <div className="container-fluid text-center text-md-left">
         <div className="row">
             <div className="col-md-12 mt-md-0 mt-3">
@@ -19,5 +28,7 @@ const Footer = () => <footer className="page-footer font-small blue pt-4">
     </div>
 
 </footer>
+    );
+};
 
-export default Footer
+export default Footer;

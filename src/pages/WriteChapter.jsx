@@ -8,13 +8,17 @@ import axios from 'axios';
 const WriteChapter = () => {
   
   const [ textValue, setTextValue ] = useState('');  
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);  
 
+  // 모달 닫기
   const handleCloseModal = () => {
     setShowModal(false);
   };
 
-  const handleCompleteWriting = () => {    
+  // 현재 작성중인 소설 내용 전송
+  const handleCompleteWriting = () => {  
+    
+    
     const data = {
       text: textValue
     };    
@@ -28,25 +32,42 @@ const WriteChapter = () => {
       });
   };
 
+  const handleChange = (event) => {
+    const newText = event.target.value;
+    setTextValue(newText);
+  };
+
+  const getByteCount = (text) => {    
+    const encoder = new TextEncoder();
+    const encodedText = encoder.encode(text);
+
+    return encodedText.length;
+  };
+
   const handleSelectImg = () => {
     setShowModal(true);
   }
 
     return (        
-          <div className={styles.writeForm}>            
-              챕터제목 : <input placeholder='chapter...'></input><hr/>
+          <div className={styles.container}> 
+            <div className={styles.chapterTitle}>
+              챕터제목 : <input placeholder='chapter...' size="70"></input><hr/>
+            </div>           
             <textarea 
               className={styles.txtarea}
               placeholder="여기에 입력하세요"                     
               value={textValue}
-              onChange={(e) => setTextValue(e.target.value)}
+              onChange={handleChange}
             ></textarea>          
+            <p className={styles.byteCount}>
+              {getByteCount(textValue)} bytes / {(getByteCount(textValue) / 1024).toFixed(2)} KB
+            </p>
             <hr />
-            <div>            
+            <div className={styles.btn}>            
                   <Button variant="outline-info" onClick={handleSelectImg}>그림 선택</Button>
                   <Button variant="outline-warning">임시 저장</Button>
                   <Button variant="outline-success" onClick={handleCompleteWriting}>글 작성 완료</Button>
-            </div>
+            </div>            
             <Modals show={showModal} handleClose={handleCloseModal} />          
           </div>
           

@@ -3,17 +3,23 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { NovelContext, NovelProvider } from './context/NovelContext';
+import store from './store';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { NovelProvider } from './context/NovelContext';
+import { CookiesProvider } from 'react-cookie';
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <NovelProvider>
-      <App />
-    </NovelProvider>
-  </React.StrictMode>
+  <CookiesProvider>
+      <NovelProvider>
+        <Provider store={store}>
+            <App />
+        </Provider>
+        </NovelProvider>
+    </CookiesProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

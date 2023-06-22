@@ -7,7 +7,7 @@ const NavBarElements = () => {
   const location = useLocation();
   
   if (location.pathname === '/') {
-    return null; // 루트 페이지에서 NavBarElements를 렌더링하지 않습니다.
+    return null; 
   }
     return (
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -28,8 +28,8 @@ const NavBarElements = () => {
                 <Nav.Link href="bookList">소설 구경 가기</Nav.Link>                
               </Nav>
               <Nav>
-                <Nav.Link href="#deets">로그인</Nav.Link>
-                <Nav.Link eventKey={2} href="#memes">
+                <Nav.Link href="login">로그인</Nav.Link>
+                <Nav.Link eventKey={2} href="join">
                   회원가입
                 </Nav.Link>
               </Nav>

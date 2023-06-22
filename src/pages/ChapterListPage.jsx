@@ -44,7 +44,7 @@ const ChapterListPage = () => {
                 <CoverModals show={showModal} handleClose={handleCloseModal} />
             </Col>
         </Row>      
-        </Container> 
+        </Container> <br/><br/><br/><br/><br/>
         </div>
     )
 }

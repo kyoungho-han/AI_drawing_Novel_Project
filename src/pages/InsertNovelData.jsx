@@ -46,7 +46,7 @@ const InsertNovelData = () => {
           <label className={styles.genre}>소설 장르</label>
           <select
             value={novelGenre}
-            onChange={(e) => setNovelGenre(e.target.value)}
+            onChange={(e) => setNovelGenre(e.target.value)}            
           >
             <option value="추리">추리</option>
             <option value="스릴러">스릴러</option>

@@ -6,7 +6,7 @@ const NovelContext = createContext();
 // Create a provider component
 const NovelProvider = ({ children }) => {
   const [novelTitle, setNovelTitle] = useState("");
-  const [novelGenre, setNovelGenre] = useState("");
+  const [novelGenre, setNovelGenre] = useState("추리");
 
   return (
     <NovelContext.Provider
