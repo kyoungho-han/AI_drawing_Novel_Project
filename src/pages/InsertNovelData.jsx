@@ -12,22 +12,23 @@ const InsertNovelData = () => {
   const handleSubmit = () => {
     setNovelGenre(novelGenre);
     setNovelTitle(novelTitle);
-    navigate('/ChapterListPage');
+   
     
-    /*
+    
     const novelData = {
       title: novelTitle,
-      genre: novelGenre
+      name: novelGenre
     };  
         
     axios.post('/api/novels', novelData)
       .then(response => {        
-        navigate('/other-page');
+        //navigate('');
       })
       .catch(error => {        
         console.error(error);
       });
-      */
+      
+      navigate('/ChapterListPage');
   };
 
   return (

@@ -5,6 +5,8 @@ import "../styles/Main.css";
 import BookList from "../components/BookList";
 import RankList from "../components/RankList";
 import data from "../testData.json";
+import CardTabs from "../components/CardTabs";
+import Slides from "../components/Slides";
 
 
 function Main(){
@@ -12,16 +14,12 @@ function Main(){
   const navigate = useNavigate();
 
   return(
-    <div id="container">
-      <nav>
-        <img src={Logo} alt=""></img>
-        <div className="menu">
-          <Link className="menu-link" to='/login'>로그인</Link>
-          <Link className="menu-link" to='/join'>회원가입</Link>
-          <Link className="menu-link" to='/imagecreate'>이미지 생성</Link>
-        </div>
-      </nav>
-      <div className="title">
+    <div id="container">  
+      <Slides />
+      <br/><br/>
+      <CardTabs />
+      <br/><br/>
+      {/* <div className="title">
         <h2>작품 리스트</h2>
       </div>
       <div className="sidebar">
@@ -36,7 +34,7 @@ function Main(){
            navigate(`#`)
         }}></BookList>
       
-      </div>
+      </div> */}
     </div>
   );
 }

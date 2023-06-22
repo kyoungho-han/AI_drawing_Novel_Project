@@ -48,7 +48,7 @@
 .page {
   flex-wrap: wrap;
   height: 100vh;
-  background-color: #E1D4BB;
+  background-color: aliceblue;
 }
 .resultImg {  
   margin-left: 120px;

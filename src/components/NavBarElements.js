@@ -10,9 +10,17 @@ const NavBarElements = () => {
     return null; // 루트 페이지에서 NavBarElements를 렌더링하지 않습니다.
   }
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
           <Container>
-            <Navbar.Brand href="/">너와 나의 연결 스토리</Navbar.Brand>
+            <Navbar.Brand href="/main">
+            <img
+              alt="logo"
+              src="/img/book.png"
+              width="30"
+              height="30"              
+            />{' '}
+              너와 나의 연결 스토리
+              </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
