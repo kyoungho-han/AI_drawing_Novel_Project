@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/BookGrid.module.css";
 
 const BookGrid = (props) => {
-  const { datas } = props;
+  const { datas, onClick } = props;
 
   if (!datas || datas.length === 0) {
     return <div>No data available</div>;
@@ -15,7 +15,7 @@ const BookGrid = (props) => {
             <img src="img/images.png" alt="Book" />
           </div>
           <div className={styles.details}>
-            <h2>{data.title}</h2>
+            <h2 onClick={() => onClick(data.novelId)}>{data.title}</h2>
             <p>{data.name}</p>
             <p>{data.genre}</p>
             <hr/>

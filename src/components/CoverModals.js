@@ -2,35 +2,84 @@ import React, {useState} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import '../styles/Modals.css';
+import "../styles/Modals.css"
 import { Configuration, OpenAIApi } from "openai";
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import {useSelector } from 'react-redux';
 
 const CoverModals = ({ show, handleClose }) => {
   const [prompt, setPrompt] = useState("");
+
+  const accessToken  = useSelector((state) => state.authToken);
+  
+  //번역 글
+  const [changePrompt, setChangePrompt] = useState("");
   const [results, setResults] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");    
+
+  const [fileData , setFileData] = useState({});
+
   const configuration = new Configuration({
-    apiKey: process.env.REACT_APP_Dalle_Key,
+    apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
   const navigate = useNavigate();
 
-  const generateImages = async () => {        
-    const res = await openai.createImage({
-      prompt: prompt,
-      n: 4,
-      size: "256x256",
-    });
-    setResults(res.data.data.map(item => item.url));
+  const translateAndGenerateImages = async () => {
+    try {
+      // Step 1: Translate the string
+      const translationResponse = await axios.post(
+        'http://localhost:3000/novels/translate',
+        {
+          string: prompt,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken.accessToken}`,
+          }
+        }
+      );
+      const translatedString = translationResponse.data.string;
+  
+      // Step 2: Generate images based on the translated string
+      const imageResponse = await openai.createImage({
+        prompt: translatedString,
+        n: 1,
+        size: "256x256",
+      });
+      const generatedImages = imageResponse.data.data.map(item => item.url);
+      const test =  imageResponse.data.data;
+      console.log(imageResponse.data.data.map(item =>item.url))
+
+      // Step 3: Perform any further actions with the translated string and generated images
+      // For example, you can update states, display the images, etc.
+      setChangePrompt(translatedString);
+      setResults(generatedImages);
+      setFileData(test)
+      console.log(fileData)
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
+
+    const formData = new FormData();
+
+   
     alert("작성하신 소설이 출판되었습니다!");
     navigate('/main');
     handleClose();     
+
   };
+
+
+    
+
+  
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -48,7 +97,8 @@ const CoverModals = ({ show, handleClose }) => {
             />
           </Form.Group>
           <Form.Group>
-          <Button variant="primary" onClick={generateImages}>
+        
+          <Button variant="primary" onClick={translateAndGenerateImages}>
           입력 완료
         </Button>
         </Form.Group>

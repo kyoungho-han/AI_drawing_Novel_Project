@@ -9,26 +9,6 @@ function ChapterList() {
   const [chapterCount, setChapterCount] = useState(1); // 챕터 개수를 관리하는 상태
   const [chapterData, setChapterData] = useState([]); // 챕터 정보를 관리하는 상태
 
-  useEffect(() => {
-    
-    const data = {
-      chapterName: "",
-      prevChapterId: "",
-      novelId: novelId,
-      writing: ""
-    };  
-
-    axios.post('http://localhost:3000/chapters', data)
-      .then(response => {
-        const chapters = response.data;
-        console.log(chapters);
-        setChapterData(chapters);
-        setChapterCount(chapters.length);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
 
   const handleAddChapter = () => {
     if (chapterCount < 10) {

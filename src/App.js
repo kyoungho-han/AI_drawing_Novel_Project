@@ -14,6 +14,8 @@ import ImageCreate from './components/ImageCreate';
 import InsertNovelData from './pages/InsertNovelData';
 import MyNovels from './pages/MyNovels';
 import { NovelProvider } from './context/NovelContext';
+import DetailPage from './pages/DetailPage';
+import BookViewPage from './pages/BookViewPage';
 
 
 
@@ -33,6 +35,10 @@ function App() {
             <Route path = "/insertNovelData" element = { <InsertNovelData/> } />
             <Route path = "/writeChapter/:chapterNumber" element={<WriteChapter />} />            
             <Route path = "/myNovels" element = { <MyNovels />} />
+            <Route path='/detail' element={<DetailPage/>}></Route>
+            <Route path="/detail/:novelId" element={<DetailPage />} />
+            <Route path='/bookview' element={<BookViewPage/>}/>
+            <Route path='/bookview/:chapterId' element={<BookViewPage/>}/>
           </Routes>          
           <FooterStyle>
             <Footer />

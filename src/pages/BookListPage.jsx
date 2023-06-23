@@ -11,12 +11,15 @@ import styles from "../styles/BookListPage.module.css";
 import Stack from 'react-bootstrap/Stack';
 import { requestToken } from '../api/Users';
 import { SET_TOKEN } from '../store/Auth';
+import { useNavigate } from "react-router-dom";
+import DetailPage from "./DetailPage";
 
 const BookListPage = () => {
   const [novels, setNovels] = useState([]);
   const [datas, setDatas] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
+  const navigate = useNavigate();
 
   const accessToken = useSelector((state) => state.authToken);
   console.log(accessToken.accessToken);
@@ -45,6 +48,11 @@ const BookListPage = () => {
     currentPage * postsPerPage
   );
   console.log(datas);
+
+  const handleTitleClick = async(novelId) => {
+    console.log(novelId)
+    navigate(`/detail/${novelId}`)
+  }
   
   return (
     <div>      
@@ -74,7 +82,7 @@ const BookListPage = () => {
           </Stack>
           <br/><br/>
         </div>
-        <BookGrid datas={currentPosts}></BookGrid>
+        <BookGrid datas={currentPosts} onClick={handleTitleClick}></BookGrid>
         <br />
         <div className="d-flex justify-content-center">
           <PageNations
