@@ -5,55 +5,75 @@ import { NovelContext } from '../context/NovelContext';
 import axios from 'axios';
 
 function ChapterList() {
-  const { novelTitle, novelGenre, userName, novelId, setChapterId, chapterId } = useContext(NovelContext);
+  const { novelTitle, novelGenre, userName, novelId, setChapterId, chapterId, chapterName } = useContext(NovelContext);
   const [chapterCount, setChapterCount] = useState(1); // 챕터 개수를 관리하는 상태
   const [chapterData, setChapterData] = useState([]); // 챕터 정보를 관리하는 상태
 
-
+  
+  useEffect(() => {    
+    axios.get('http://localhost:3000/chapters', {
+      params: {
+        novelId: novelId
+      }
+    })
+      .then(response => {
+        setChapterData(response.data.dtoList);
+        setChapterCount(response.data.dtoList.length);
+        console.log(chapterData);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      
+  }, [chapterCount]);
+  
   const handleAddChapter = () => {
-    if (chapterCount < 10) {
+    
       setChapterCount(prevCount => prevCount + 1); // 챕터 개수를 1 증가시킴
       
+      
       const data = {
-        chapterName: "",
+        chapterName: chapterName,
         novelId: novelId,
-        writing: ""
+        writing: "",
+        prevChapter: chapterId
       };  
   
       axios.post('http://localhost:3000/chapters', data)
         .then(response => {
           console.log(response.data); 
-          const {chapterId} = response.data;
+          const {chapterId} = response.data.chapterId;
           console.log(chapterId);
           setChapterId(chapterId);
         })
         .catch(error => {
           console.log(error);
         });
-      
-      
-    }
+    
   };
-  const renderChapterItems = () => {
-    const chapterItems = [];
-    for (let i = 1; i <= chapterCount; i++) {
-      const currentChapterId = i; // Store the current chapter ID in a separate variable
-  
-      chapterItems.push(
-        <ListGroup.Item
-          key={i}
-          as="li"
-          className="listGroup"
-        >
+
+  const handleChapterId = (chapterId) => {
+    setChapterId(chapterId);
+    console.log(chapterId);
+  }
+
+
+  const renderChapterItems = () => {    
+    for (let i = 1; i <= chapterCount; i++) {        
+      return chapterData.map((chapter) => (
+          <ListGroup.Item
+            key={i}
+            as="li"
+            className="listGroup"
+          >
           <div className="list">
-            <Link to={`/writeChapter/${currentChapterId}`}>
-              <div className="fw-bold">chapter{i} 쓰기</div>
+            <Link to={`/writeChapter`}>
+              <div className="fw-bold" onClick={() => handleChapterId(chapter.chapterId)}>{chapter.chapterName}</div>
             </Link>
           </div>
         </ListGroup.Item>
-      );
-    }
-    return chapterItems;
+      ));
+    }    
   };
   
 

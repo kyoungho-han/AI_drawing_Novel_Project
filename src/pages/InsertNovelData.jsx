@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const InsertNovelData = () => {
-  const { novelTitle, setNovelTitle, novelGenre, setNovelGenre, userName, setNovelId } = useContext(NovelContext);
+  const { novelTitle, setNovelTitle, novelGenre, setNovelGenre, userName, setNovelId, novelId, setChapterId, chapterId, chapterName } = useContext(NovelContext);
   const navigate = useNavigate();
   console.log(userName);
 
@@ -27,13 +27,30 @@ const InsertNovelData = () => {
       .then(response => {
         console.log(response.data);
         const {novelId} = response.data;        
-        setNovelId(novelId);        
+        setNovelId(novelId);
+
+        const data2 = {
+          chapterName: chapterName,
+          novelId: novelId,
+          writing: ""
+        };  
+    
+        axios.post('http://localhost:3000/chapters', data2)
+          .then(response2 => {
+            console.log(response2.data); 
+            const {chapterId} = response2.data;            
+            console.log(chapterId);
+            setChapterId(chapterId);
+            navigate(`/ChapterListPage/${novelId}`);
+          })
+          .catch(error => {
+            console.log(error);
+          });        
       })
       .catch(error => {        
         console.log(error);
       });
 
-      navigate('/chapterListPage');
     } 
    
 

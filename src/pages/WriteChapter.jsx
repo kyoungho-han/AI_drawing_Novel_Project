@@ -1,18 +1,37 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import styles from '../styles/WriteChapter.module.css';
 import Form from 'react-bootstrap/Form';
 import Modals from '../components/Modals';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { NovelContext } from '../context/NovelContext';
+import { useNavigate } from 'react-router-dom';
 
 const WriteChapter = () => {
-  
+  const { chapterName, setChapterName, novelId, chapterId, setChapterWriting, chapterWriting } = useContext(NovelContext);
   const [ chapterTitle, setChapterTitle ] = useState('');
   const [ textValue, setTextValue ] = useState('');  
   const [ showModal, setShowModal ] = useState(false);  
-  const { chapterNumber } = useParams();
+  const navigate = useNavigate();
 
+  useEffect(() => {    
+    axios.get(`http://localhost:3000/chapters/${chapterId}`, {
+   
+    })
+      .then(response => {
+        console.log(response.data.chapterName);
+        setChapterTitle(response.data.chapterName);
+        setTextValue(response.data.writing);
+        console.log(chapterWriting);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      
+  }, []);
+
+  console.log(chapterId);
   // 모달 닫기
   const handleCloseModal = () => {
     setShowModal(false);
@@ -20,18 +39,16 @@ const WriteChapter = () => {
 
   // 현재 작성중인 소설 내용 전송
   const handleCompleteWriting = () => {  
-    
-    
+        
     const data = {
-      chapterName: chapterTitle,
-      prevChapterId: 1,
-      novelId: 1,
+      chapterName: chapterTitle,            
       writing: textValue      
     };
 
-    axios.post('http://localhost:3000/chapters', data)
-      .then(response => {
-        console.log(response.data);
+    axios.put(`http://localhost:3000/chapters/${chapterId}`, data)
+      .then(response => {        
+        console.log(response.data); 
+        navigate(`/ChapterListPage/${novelId}`);       
       })
       .catch(error => {        
         console.log(error);
@@ -40,12 +57,13 @@ const WriteChapter = () => {
   
 
   const handleChangeTitle = (event) => {
-    const newTitle = event.target.value;
-    setChapterTitle(newTitle);
+    const newTitle1 = event.target.value;
+    setChapterTitle(newTitle1);
   }
+  
   const handleChangeWriting = (event) => {
-    const newText = event.target.value;
-    setTextValue(newText);
+    const newText1 = event.target.value;
+    setTextValue(newText1);
   };
 
 
@@ -62,17 +80,19 @@ const WriteChapter = () => {
 
     return (        
           <div className={styles.container}> 
-            <div className={styles.chapterTitle}>            
-              챕터제목 : <input placeholder='chapter...' size="70" onClick={handleChangeTitle}></input><hr/>
+            <div className={styles.chapterTitle}>  
+              챕터제목 :<textarea className={styles.txtareaName}                                
+              value={chapterTitle}
+              onChange={handleChangeTitle}
+            ></textarea>  <hr/>
             </div>           
             <textarea 
-              className={styles.txtarea}
-              placeholder="여기에 입력하세요"                     
+              className={styles.txtarea}                                
               value={textValue}
               onChange={handleChangeWriting}
             ></textarea>          
             <p className={styles.byteCount}>
-              {getByteCount(textValue)} bytes / {(getByteCount(textValue) / 1024).toFixed(2)} KB
+              {getByteCount(textValue)} bytes / {(5000 / 1024).toFixed(2)} KB
             </p>
             <hr />
             <div className={styles.btn}>            

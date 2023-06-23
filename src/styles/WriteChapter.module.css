@@ -20,6 +20,11 @@
     width: 80%;
     height: 500px;    
 }
+.txtareaName { 
+    margin-top:10px;    
+    width: 20%;
+    height: 30px;  
+}
 .btn {
     text-align: center;    
 }

@@ -61,7 +61,7 @@ function DetailPage() {
   
   return(
     <div className={style.container}>
-      <img src="img/images.png" alt="page"></img>
+      <img src="../img/images.png" alt="page"></img>
       <div className={style.bookData}>
         <h2>{nobelData.title}</h2>
         <h3>{nobelData.name}</h3>

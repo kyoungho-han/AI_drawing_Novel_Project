@@ -31,9 +31,9 @@ function App() {
             <Route path='/join' element={<UserJoin/>}></Route>
             <Route path='/imagecreate' element={<ImageCreate/>}></Route>
             <Route path = "/bookList" element = { <BookListPage /> } />        
-            <Route path = "/chapterListPage" element = { <ChapterListPage /> } />        
+            <Route path = "/chapterListPage/:novelId" element = { <ChapterListPage /> } />        
             <Route path = "/insertNovelData" element = { <InsertNovelData/> } />
-            <Route path = "/writeChapter/:chapterNumber" element={<WriteChapter />} />            
+            <Route path = "/writeChapter" element={<WriteChapter />} />            
             <Route path = "/myNovels" element = { <MyNovels />} />
             <Route path='/detail' element={<DetailPage/>}></Route>
             <Route path="/detail/:novelId" element={<DetailPage />} />
