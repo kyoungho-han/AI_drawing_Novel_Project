@@ -6,8 +6,7 @@ export const FooterStyle = styled.section`
     height: 100%;
     color: #ffffff;
     background-color: #020715;
-    position: relative;
+    position: relative;    
     display: flex;
-    justify-content: center;    
-    
+    justify-content: center;
 `

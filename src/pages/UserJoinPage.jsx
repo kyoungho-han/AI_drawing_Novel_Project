@@ -121,7 +121,7 @@ function UserJoin() {
     axios.post("http://localhost:8080/authors/join", {
       username: userId,
       password: userPw,
-      name: userName,
+      name: userName,      
   },
   {
     headers: {

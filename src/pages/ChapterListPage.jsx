@@ -42,8 +42,9 @@ const ChapterListPage = () => {
                     <Button variant="outline-info" onClick={handleSelectImg}>출판 하기</Button>
                 </div>
                 <CoverModals show={showModal} handleClose={handleCloseModal} />
-            </Col>
-        </Row>      
+            </Col>            
+        </Row>    
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> 
         </Container> <br/><br/><br/><br/><br/>
         </div>
     )

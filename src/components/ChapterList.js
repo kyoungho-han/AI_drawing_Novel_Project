@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { NovelContext } from '../context/NovelContext';
 
 function ChapterList() {
-  const { novelTitle, novelGenre } = useContext(NovelContext);
+  const { novelTitle, novelGenre, userName } = useContext(NovelContext);
   const [chapterCount, setChapterCount] = useState(1); // 챕터 개수를 관리하는 상태
 
   const handleAddChapter = () => {
@@ -41,7 +41,7 @@ function ChapterList() {
         className="d-flex justify-content-between align-items-start"
       >
         <div className="ms-2 me-auto">
-          <div className="fw-bold"> {novelTitle} / 글쓴이 / {novelGenre} </div>          
+          <div className="fw-bold"> {novelTitle} / {userName} / {novelGenre} </div>          
         </div>        
       </ListGroup.Item>
       {renderChapterItems()}

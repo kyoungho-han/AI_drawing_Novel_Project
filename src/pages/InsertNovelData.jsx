@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const InsertNovelData = () => {
-  const { novelTitle, setNovelTitle, novelGenre, setNovelGenre } = useContext(NovelContext);
+  const { novelTitle, setNovelTitle, novelGenre, setNovelGenre, userName } = useContext(NovelContext);
   const navigate = useNavigate();
-
+  console.log(userName);
   const handleSubmit = () => {
     setNovelGenre(novelGenre);
     setNovelTitle(novelTitle);
@@ -17,10 +17,10 @@ const InsertNovelData = () => {
     
     const novelData = {
       title: novelTitle,
-      name: novelGenre
+      genre: novelGenre
     };  
         
-    axios.post('/api/novels', novelData)
+    axios.post('', novelData)
       .then(response => {        
         //navigate('');
       })

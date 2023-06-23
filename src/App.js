@@ -13,14 +13,16 @@ import UserJoin from './pages/UserJoinPage';
 import ImageCreate from './components/ImageCreate';
 import InsertNovelData from './pages/InsertNovelData';
 import MyNovels from './pages/MyNovels';
+import { NovelProvider } from './context/NovelContext';
 
 
 
 function App() {
   return (    
     <Router>
-      <NavBarElements />      
-          <Routes>
+      <NovelProvider>
+        <NavBarElements />      
+          <Routes>            
             <Route path='/' element={<Start/>}></Route>
             <Route path='/main' element={<Main/>}></Route>
             <Route path='/login' element={<Login/>}></Route>
@@ -31,10 +33,11 @@ function App() {
             <Route path = "/insertNovelData" element = { <InsertNovelData/> } />
             <Route path = "/writeChapter" element = { <WriteChapter /> } />            
             <Route path = "/myNovels" element = { <MyNovels />} />
-          </Routes>
+          </Routes>          
           <FooterStyle>
             <Footer />
-          </FooterStyle>   
+          </FooterStyle>  
+        </NovelProvider>
       </Router>
   );
 }

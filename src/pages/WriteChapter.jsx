@@ -7,8 +7,9 @@ import axios from 'axios';
 
 const WriteChapter = () => {
   
+  const [ chapterTitle, setChapterTitle ] = useState('');
   const [ textValue, setTextValue ] = useState('');  
-  const [showModal, setShowModal] = useState(false);  
+  const [ showModal, setShowModal ] = useState(false);  
 
   // 모달 닫기
   const handleCloseModal = () => {
@@ -20,9 +21,13 @@ const WriteChapter = () => {
     
     
     const data = {
-      text: textValue
-    };    
-    axios.post('http://localhost:8080/chapters/1', data)
+      chapterName: chapterTitle,
+      prevChapterId: 1,
+      novelId: 1,
+      writing: textValue      
+    };
+
+    axios.post('http://localhost:3000/chapters', data)
       .then(response => {
         console.log(response.data);
       })
@@ -31,11 +36,17 @@ const WriteChapter = () => {
         console.log(error);
       });
   };
+  
 
-  const handleChange = (event) => {
+  const handleChangeTitle = (event) => {
+    const newTitle = event.target.value;
+    setChapterTitle(newTitle);
+  }
+  const handleChangeWriting = (event) => {
     const newText = event.target.value;
     setTextValue(newText);
   };
+
 
   const getByteCount = (text) => {    
     const encoder = new TextEncoder();
@@ -51,13 +62,13 @@ const WriteChapter = () => {
     return (        
           <div className={styles.container}> 
             <div className={styles.chapterTitle}>
-              챕터제목 : <input placeholder='chapter...' size="70"></input><hr/>
+              챕터제목 : <input placeholder='chapter...' size="70" onClick={handleChangeTitle}></input><hr/>
             </div>           
             <textarea 
               className={styles.txtarea}
               placeholder="여기에 입력하세요"                     
               value={textValue}
-              onChange={handleChange}
+              onChange={handleChangeWriting}
             ></textarea>          
             <p className={styles.byteCount}>
               {getByteCount(textValue)} bytes / {(getByteCount(textValue) / 1024).toFixed(2)} KB
@@ -69,7 +80,9 @@ const WriteChapter = () => {
                   <Button variant="outline-success" onClick={handleCompleteWriting}>글 작성 완료</Button>
             </div>            
             <Modals show={showModal} handleClose={handleCloseModal} />          
+            <br/><br/><br/><br/><br/><br/>
           </div>
+          
           
         
       );
