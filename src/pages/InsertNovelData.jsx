@@ -6,30 +6,36 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const InsertNovelData = () => {
-  const { novelTitle, setNovelTitle, novelGenre, setNovelGenre, userName } = useContext(NovelContext);
+  const { novelTitle, setNovelTitle, novelGenre, setNovelGenre, userName, setNovelId } = useContext(NovelContext);
   const navigate = useNavigate();
   console.log(userName);
+
+
   const handleSubmit = () => {
     setNovelGenre(novelGenre);
     setNovelTitle(novelTitle);
-   
+    console.log(novelGenre, novelTitle, userName);
     
-    
-    const novelData = {
+    const data = {
       title: novelTitle,
-      genre: novelGenre
+      genre: novelGenre,
+      name: userName,
+      isPublic: false
     };  
-        
-    axios.post('', novelData)
-      .then(response => {        
-        //navigate('');
+
+    axios.post('http://localhost:3000/novels', data)
+      .then(response => {
+        console.log(response.data);
+        const {novelId} = response.data;        
+        setNovelId(novelId);        
       })
       .catch(error => {        
-        console.error(error);
+        console.log(error);
       });
-      
-      navigate('/ChapterListPage');
-  };
+
+      navigate('/chapterListPage');
+    } 
+   
 
   return (
     <div className={styles.page}>

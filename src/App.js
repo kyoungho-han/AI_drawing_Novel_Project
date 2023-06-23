@@ -31,7 +31,7 @@ function App() {
             <Route path = "/bookList" element = { <BookListPage /> } />        
             <Route path = "/chapterListPage" element = { <ChapterListPage /> } />        
             <Route path = "/insertNovelData" element = { <InsertNovelData/> } />
-            <Route path = "/writeChapter" element = { <WriteChapter /> } />            
+            <Route path = "/writeChapter/:chapterNumber" element={<WriteChapter />} />            
             <Route path = "/myNovels" element = { <MyNovels />} />
           </Routes>          
           <FooterStyle>

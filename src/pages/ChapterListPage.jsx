@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import { NovelContext } from '../context/NovelContext';
 import ChapterList from '../components/ChapterList'
 import styles from '../styles/ChapterListPage.module.css';
 import Container from 'react-bootstrap/Container';
@@ -10,6 +11,7 @@ import CoverModals from '../components/CoverModals';
 
 
 const ChapterListPage = () => {    
+    const { novelId } = useContext(NovelContext);
     const [showModal, setShowModal] = useState(false);
     const location = useLocation();
     const selectedImage = location.state?.selectedImage;
@@ -22,7 +24,7 @@ const ChapterListPage = () => {
     const handleSelectImg = () => {
         setShowModal(true);
     };
-
+    
     return (
         <div className={styles.section}>            
         <Container>              

@@ -4,12 +4,14 @@ import styles from '../styles/WriteChapter.module.css';
 import Form from 'react-bootstrap/Form';
 import Modals from '../components/Modals';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const WriteChapter = () => {
   
   const [ chapterTitle, setChapterTitle ] = useState('');
   const [ textValue, setTextValue ] = useState('');  
   const [ showModal, setShowModal ] = useState(false);  
+  const { chapterNumber } = useParams();
 
   // 모달 닫기
   const handleCloseModal = () => {
@@ -31,8 +33,7 @@ const WriteChapter = () => {
       .then(response => {
         console.log(response.data);
       })
-      .catch(error => {
-        console.log("error");
+      .catch(error => {        
         console.log(error);
       });
   };
@@ -61,7 +62,7 @@ const WriteChapter = () => {
 
     return (        
           <div className={styles.container}> 
-            <div className={styles.chapterTitle}>
+            <div className={styles.chapterTitle}>            
               챕터제목 : <input placeholder='chapter...' size="70" onClick={handleChangeTitle}></input><hr/>
             </div>           
             <textarea 
