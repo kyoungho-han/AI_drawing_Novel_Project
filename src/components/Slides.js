@@ -7,8 +7,9 @@ function Slides() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="img/게임방송.jpeg"
+          src="img/game.jpeg"
           alt="First slide"
+          style={{ width: '500px', height: '300px' }}
         />
         <Carousel.Caption>          
         </Carousel.Caption>
@@ -16,8 +17,9 @@ function Slides() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="img/농구.jpeg"
+          src="img/basketball.jpeg"
           alt="Second slide"
+          style={{ width: '500px', height: '300px' }}
         />
 
         <Carousel.Caption>          
@@ -26,8 +28,9 @@ function Slides() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="img/아스팔트.jpeg"
+          src="img/asp.jpeg"
           alt="Third slide"
+          style={{ width: '500px', height: '300px' }}
         />
 
         <Carousel.Caption>          

@@ -19,7 +19,7 @@ const CoverModals = ({ show, handleClose }) => {
   const generateImages = async () => {        
     const res = await openai.createImage({
       prompt: prompt,
-      n: 1,
+      n: 4,
       size: "256x256",
     });
     setResults(res.data.data.map(item => item.url));

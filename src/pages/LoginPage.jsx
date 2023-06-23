@@ -16,7 +16,6 @@ import { SET_TOKEN } from '../store/Auth';
 
 
 
-
 function Login(props) {
   // 1. 로그인시 서버측에 토큰 요청
   // 2. 만약에 맞다면 메인 페이지로 이동
@@ -57,8 +56,9 @@ function Login(props) {
       if (response.status) {
           // 쿠키에 Refresh Token, store에 Access Token 저장
           setRefreshToken(response.json.refresh_token);
+         
           dispatch(SET_TOKEN(response.json.access_token));
-          console.log(isToken)
+          console.log(response.json.access_token)
           return navigate("/main");
           
       } else {
@@ -72,7 +72,7 @@ function Login(props) {
 
   return(
     <div>
-    <NavBarElements> token={isToken}</NavBarElements>
+      <NavBarElements></NavBarElements>
     <h1>로그인</h1>
     <form onSubmit={handleSubmit(onValid)} className={style.formStyle}>
         <div className={style.username}>
